@@ -1,0 +1,139 @@
+# =====================================================================
+# Configuração do dashboard — Survey "Clareza dos requisitos e retrabalho"
+# Edite APENAS este arquivo para apontar para a exportação real do
+# formulário. O código lê os dados brutos e aplica tudo a partir daqui.
+# =====================================================================
+
+estudo:
+  titulo: "Clareza dos requisitos e retrabalho percebido"
+  disciplina: "Medição e Experimentação em Engenharia de Software"
+  grupo: "Gabriel Chagas, Guilherme Lana, Marcus Vincius, Enzo Cazaes e Guilherme de Almeida"
+  commit_protocolo: "https://github.com/gabrielchagas13/survey-clareza-requisitos/commit/fbe39a1"
+  coleta_inicio: "2026-11-13"   # planejado no protocolo; 1ª resposta real em 20/11
+  coleta_fim: "2026-11-26"      # 14 dias corridos
+  lembretes: []   # preencher com as datas reais dos lembretes, se houve
+  meta_n: 60
+  minimo_n: 50
+
+# Exportação bruta do formulário (CSV do Google Forms, versão oficial).
+arquivo_dados: "data/respostas_oficiais.csv"
+
+# true só para o conjunto simulado de demonstração.
+dados_simulados: false
+
+# Codificação temática da pergunta aberta E2, feita por dois integrantes
+# (colunas: id, codificador_1, codificador_2, codigo_final). O "id" é o número
+# da resposta na ordem da exportação (1 = primeira linha de dados).
+arquivo_codificacao_e2: "data/codificacao_E2.csv"
+
+# Colunas com identificadores, removidas na leitura (o Google Forms deste
+# survey não coletou e-mail; a lista fica como proteção).
+colunas_remover: ["Endereço de e-mail", "Email", "Nome"]
+
+# Nome da coluna na exportação para cada código do questionário.
+# null = o formulário não tem essa pergunta/coluna.
+colunas:
+  id: null                              # Google Forms não exporta ID: usa a ordem da linha
+  carimbo: "Carimbo de data/hora"
+  inicio: null                          # Google Forms não registra início → critério (d) não aplicável
+  duracao_seg: null
+  canal: null                           # não houve identificador de canal no formulário
+  consentimento: "Voce concorda em participar da pesquisa?"
+  maior_idade: "Você tem mais de 18 anos?"
+  atua_dev: "Pergunta 3 — Você atua atualmente ou atuou nos últimos 12 meses como desenvolvedor(a) ou estagiário(a) de desenvolvimento em pelo menos um projeto de software?"
+  colega_turma: null                    # pergunta não incluída no formulário
+  P1: "P1 — Qual é a sua função atual ou mais recente no desenvolvimento de software?"
+  P2: "P2 — Há quantos anos você trabalha com desenvolvimento de software?"
+  P3: "P3 — Qual é o porte da organização em que você trabalha ou trabalhou mais recentemente?"
+  P4: "P4 — Qual é a forma de trabalho predominante no seu projeto ou equipe?"
+  C1: "[C1 — As tarefas chegam com critérios de aceitação claros.]"
+  C2: "[C2 — As informações recebidas antes de iniciar uma tarefa são completas.]"
+  C3: "[C3 — Entendo o que deve ser entregue sem precisar de muitas explicações adicionais.]"
+  C4: "[C4 — Os requisitos são descritos sem ambiguidades.]"
+  A1: null                              # pergunta de atenção não incluída → critério (c) não aplicável
+  D1: "[Nos últimos três meses, com que frequência você teve dúvidas sobre o que deveria implementar?]"
+  D2: "[Nos últimos três meses, com que frequência os requisitos mudaram enquanto você estava executando uma tarefa?]"
+  R1: "[Nos últimos três meses, com que frequência você precisou refazer parte de uma tarefa que já havia realizado devido a problemas relacionados aos requisitos?]"
+  R2: "[Nos últimos três meses, com que frequência você teve retrabalho causado por interpretações diferentes de um mesmo requisito?]"
+  R3: "[O retrabalho relacionado aos requisitos consome uma parte significativa do meu tempo de trabalho.]"
+  E1: "Quais práticas são utilizadas em sua equipe para esclarecer os requisitos antes ou durante o desenvolvimento?"
+  E2: "Na sua opinião, qual prática mais ajuda a evitar retrabalho causado por problemas nos requisitos? Por quê?"
+
+valores:
+  consentimento_aceito: ["Sim, li e concordo em participar voluntariamente."]
+  elegibilidade:
+    maior_idade: ["Sim"]
+    atua_dev: ["Sim"]
+    colega_turma: ["Não"]
+  atencao_correta: 3
+  likert:
+    "Discordo totalmente": 1
+    "Discordo parcialmente": 2
+    "Nem concordo nem discordo": 3
+    "Concordo parcialmente": 4
+    "Concordo totalmente": 5
+  frequencia:
+    "Nunca": 1
+    "Raramente": 2
+    "Às vezes": 3
+    "Frequentemente": 4
+    "Sempre": 5
+  # P2 foi coletada em faixas fechadas no formulário (não como número).
+  p2_categorias:
+    "Menos de um": "< 1 ano"
+    "1-2 anos": "1–2 anos"
+    "3-6 anos": "3–6 anos"
+    "7-9 anos": "7 anos ou mais"
+    "Mais de 10 anos": "7 anos ou mais"
+  # Rótulos encurtados para exibição; porte recodificado nas 3 faixas do protocolo.
+  recodificar:
+    P1:
+      "Estagiário(a) de Desenvolvimento": "Estagiário(a)"
+      "Desenvolvedor(a) júnior": "Júnior"
+      "Desenvolvedor(a) pleno": "Pleno"
+      "Desenvolvedor(a) sênior": "Sênior"
+      "Outro": "Outra"
+    P3:
+      "Até 50 colaboradores": "Até 50 pessoas"
+      "De 51 a 100 colaboradores": "51–500 pessoas"
+      "De 101 até 500 colaboradores": "51–500 pessoas"
+      "Mais de 500 colaboradores": "Mais de 500 pessoas"
+    P4:
+      "Ágil (Scrum, Kanban ou similar)": "Ágil"
+      "Híbrida (combinação de métodos ágeis e tradicionais)": "Híbrida"
+      "Tradicional / Cascata": "Cascata"
+      "Outro": "Outra"
+  funcao_estagiario: ["Estagiário(a)"]
+  ordem_funcao: ["Estagiário(a)", "Júnior", "Pleno", "Sênior", "Outra"]
+  ordem_porte: ["Até 50 pessoas", "51–500 pessoas", "Mais de 500 pessoas"]
+  ordem_forma: ["Ágil", "Híbrida", "Cascata", "Outra"]
+  # Opções de E1 exatamente como no formulário (detectadas por texto na célula).
+  praticas_e1:
+    - "Definição de critérios de aceitação"
+    - "Criação de protótipos ou wireframes"
+    - "Utilização de histórias de usuário (user stories)"
+    - "Comunicação direta com Product Owner (PO) ou cliente"
+    - "Consulta à documentação dos requisitos"
+    - "Nenhuma das práticas anteriores"
+    - "Outra"
+
+# Pré-teste (seção 4 do protocolo). O limite do descarte (d) é 1/3 da mediana.
+pre_teste:
+  mediana_min: 5.0        # <<< PREENCHER com o tempo mediano real do pré-teste
+  preenchido: false       # mude para true quando o valor acima for o real
+
+analise:
+  alfa: 0.05
+  alfa_cronbach_minimo: 0.70
+  bootstrap_reps: 2000
+  semente: 2026
+  # Mínimo de itens respondidos para calcular cada índice (análise por caso disponível)
+  min_itens_indice: {M1: 4, M2: 3, M3: 2}
+  # Faixas de experiência (anos). Limites: [0,1) [1,3) [3,6] (6, ∞)
+  # Faixas de experiência (M4). Como P2 veio em faixas, só os rótulos importam;
+  # min/max ficam para o caso de P2 numérica.
+  faixas_experiencia:
+    - {rotulo: "< 1 ano", min: 0, max: 1, inclui_max: false}
+    - {rotulo: "1–2 anos", min: 1, max: 3, inclui_max: false}
+    - {rotulo: "3–6 anos", min: 3, max: 6, inclui_max: true}
+    - {rotulo: "7 anos ou mais", min: 6, max: 100, inclui_max: true}
